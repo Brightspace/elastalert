@@ -394,6 +394,10 @@ class RulesLoader(object):
         if rule.get('scan_entire_timeframe') and not rule.get('timeframe'):
             raise EAException('scan_entire_timeframe can only be used if there is a timeframe specified')
 
+        # ensure the kibana version is a string incase defined as a float (i.e. 6.8)
+        if 'use_kibana_discover' in rule:
+            rule['use_kibana_discover'] = str(rule['use_kibana_discover'])
+
     def load_modules(self, rule, args=None):
         """ Loads things that could be modules. Enhancements, alerts and rule type. """
         # Set match enhancements
