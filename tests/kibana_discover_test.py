@@ -71,6 +71,21 @@ def test_kibana_discover_url_with_kibana_7x(kibana_version):
     assert url == expectedUrl
 
 
+def test_kibana_discover_url_with_missing_kibana_discover_version():
+    url = kibana_discover_url(
+        rule={
+            'kibana_discover_url': 'http://kibana:5601/#/discover',
+            'kibana_discover_index_pattern_id': 'logs',
+            'timestamp_field': 'timestamp',
+            'name': 'test'
+        },
+        match={
+            'timestamp': '2019-09-01T00:30:00Z'
+        }
+    )
+    assert url is None
+
+
 def test_kibana_discover_url_with_missing_kibana_discover_url():
     url = kibana_discover_url(
         rule={
