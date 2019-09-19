@@ -534,6 +534,8 @@ This setting requires the following settings are also configured:
 - ``kibana_discover_version``
 - ``kibana_discover_index_pattern_id``
 
+``use_kibana_discover: true``
+
 kibana_discover_url
 ^^^^^^^^^^^^^^^^^^^^
 
