@@ -364,3 +364,19 @@ def test_get_file_paths():
     assert 'root/a.yaml' in paths
     assert 'root/b.yaml' in paths
     assert len(paths) == 2
+
+
+def test_kibana_discover_from_timedelta():
+    test_rule_copy = copy.deepcopy(test_rule)
+    test_rule_copy['kibana_discover_from_timedelta'] = {'minutes': 2}
+    load_options(test_rule_copy, test_config, 'filename.yaml')
+    assert isinstance(test_rule_copy['kibana_discover_from_timedelta'], datetime.timedelta)
+    assert test_rule_copy['kibana_discover_from_timedelta'] == datetime.timedelta(minutes=2)
+
+
+def test_kibana_discover_to_timedelta():
+    test_rule_copy = copy.deepcopy(test_rule)
+    test_rule_copy['kibana_discover_to_timedelta'] = {'minutes': 2}
+    load_options(test_rule_copy, test_config, 'filename.yaml')
+    assert isinstance(test_rule_copy['kibana_discover_to_timedelta'], datetime.timedelta)
+    assert test_rule_copy['kibana_discover_to_timedelta'] == datetime.timedelta(minutes=2)
