@@ -58,9 +58,11 @@ Rule Configuration Cheat Sheet
 +--------------------------------------------------------------+           |
 | ``kibana4_end_timedelta`` (time, default: 10 min)            |           |
 +--------------------------------------------------------------+           |
-| ``use_kibana_discover`` (string, no default)                 |           |
+| ``use_kibana_discover`` (boolean, default False)             |           |
 +--------------------------------------------------------------+           |
 | ``kibana_discover_url`` (string, no default)                 |           |
++--------------------------------------------------------------+           |
+| ``kibana_discover_version`` (string, no default)             |           |
 +--------------------------------------------------------------+           |
 | ``kibana_discover_index_pattern_id`` (string, no default)    |           |
 +--------------------------------------------------------------+           |
@@ -525,16 +527,14 @@ This value is added in back of the event. For example,
 use_kibana_discover
 ^^^^^^^^^^^^^^^^^^^
 
-``use_kibana_discover``: Enables the generation of the ``kibana_link`` variable for a particular version of the Kibana Discover application.
-This setting requires that ``kibana_discover_url`` and ``kibana_discover_index_pattern_id`` are also configured.
+``use_kibana_discover``: Enables the generation of the ``kibana_link`` variable for the Kibana Discover application.
+This setting requires the following settings are also configured:
 
-The currently supported versions of Kibana Discover are: 
+- ``kibana_discover_url``
+- ``kibana_discover_version``
+- ``kibana_discover_index_pattern_id``
 
-- `5.6`
-- `6.0`, `6.1`, `6.2`, `6.3`, `6.4`, `6.5`, `6.6`, `6.7`, `6.8`
-- `7.0`, `7.1`, `7.2`, `7.3`
-
-``use_kibana_discover: 7.3``
+``use_kibana_discover: true``
 
 kibana_discover_url
 ^^^^^^^^^^^^^^^^^^^^
@@ -543,6 +543,19 @@ kibana_discover_url
 This value can use `$VAR` and `${VAR}` references to expand environment variables.
 
 ``kibana_discover_url: http://kibana:5601/#/discover``
+
+kibana_discover_version
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+``kibana_discover_version``: Specifies the version of the Kibana Discover application.
+
+The currently supported versions of Kibana Discover are: 
+
+- `5.6`
+- `6.0`, `6.1`, `6.2`, `6.3`, `6.4`, `6.5`, `6.6`, `6.7`, `6.8`
+- `7.0`, `7.1`, `7.2`, `7.3`
+
+``kibana_discover_version: '7.3'``
 
 kibana_discover_index_pattern_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
