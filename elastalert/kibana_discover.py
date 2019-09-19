@@ -5,7 +5,7 @@ import logging
 import json
 import os.path
 import prison
-import urllib.parse
+import urllib
 
 from .util import EAException
 from .util import lookup_es_key
@@ -72,8 +72,8 @@ def kibana_discover_url(rule, match):
 
     return "%s?_g=%s&_a=%s" % (
         os.path.expandvars(discover_url),
-        urllib.parse.quote(globalState),
-        urllib.parse.quote(appState)
+        urllib.quote(globalState),
+        urllib.quote(appState)
     )
 
 
