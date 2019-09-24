@@ -27,7 +27,7 @@ from elasticsearch.exceptions import ConnectionError
 from elasticsearch.exceptions import ElasticsearchException
 from elasticsearch.exceptions import TransportError
 from enhancements import DropMatchException
-from kibana_discover import kibana_discover_url
+from kibana_discover import generate_kibana_discover_url
 from ruletypes import FlatlineRule
 from util import add_raw_postfix
 from util import cronite_datetime_to_timestamp
@@ -1395,10 +1395,10 @@ class ElastAlerter():
             if kb_link:
                 matches[0]['kibana_link'] = kb_link
 
-        if rule.get('use_kibana_discover'):
-            kb_link = kibana_discover_url(rule, matches[0])
+        if rule.get('generate_kibana_discover_url'):
+            kb_link = generate_kibana_discover_url(rule, matches[0])
             if kb_link:
-                matches[0]['kibana_link'] = kb_link
+                matches[0]['kibana_discover_url'] = kb_link
 
         # Enhancements were already run at match time if
         # run_enhancements_first is set or
