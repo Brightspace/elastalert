@@ -1246,7 +1246,7 @@ def test_slack_attach_kibana_discover_url_when_generated():
         data=mock.ANY,
         headers={'content-type': 'application/json'},
         proxies=None,
-        verify=False,
+        verify=True,
         timeout=10
     )
     actual_data = json.loads(mock_post_request.call_args_list[0][1]['data'])
@@ -1290,7 +1290,7 @@ def test_slack_attach_kibana_discover_url_when_not_generated():
         data=mock.ANY,
         headers={'content-type': 'application/json'},
         proxies=None,
-        verify=False,
+        verify=True,
         timeout=10
     )
     actual_data = json.loads(mock_post_request.call_args_list[0][1]['data'])
@@ -1341,7 +1341,7 @@ def test_slack_kibana_discover_title():
         data=mock.ANY,
         headers={'content-type': 'application/json'},
         proxies=None,
-        verify=False,
+        verify=True,
         timeout=10
     )
     actual_data = json.loads(mock_post_request.call_args_list[0][1]['data'])
@@ -1392,7 +1392,7 @@ def test_slack_kibana_discover_color():
         data=mock.ANY,
         headers={'content-type': 'application/json'},
         proxies=None,
-        verify=False,
+        verify=True,
         timeout=10
     )
     actual_data = json.loads(mock_post_request.call_args_list[0][1]['data'])
