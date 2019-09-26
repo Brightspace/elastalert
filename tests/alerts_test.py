@@ -614,7 +614,7 @@ def test_opsgenie_details_with_non_string_field():
         'description': BasicMatchString(rule, match).__str__(),
         'details': {
             'Age': '10',
-            'Message': "{'format': 'The cow goes %s!', 'arg0': 'moo'}"
+            'Message': "{'arg0': 'moo', 'format': 'The cow goes %s!'}"
         },
         'message': 'ElastAlert: Opsgenie Details',
         'priority': None,
