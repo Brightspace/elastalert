@@ -589,11 +589,7 @@ def test_opsgenie_details_with_non_string_field():
         }
     }
     match = {
-        'age': 10,
-        'message': {
-            'format': 'The cow goes %s!',
-            'arg0': 'moo'
-        }
+        'age': 10
     }
     alert = OpsGenieAlerter(rule)
 
@@ -612,10 +608,7 @@ def test_opsgenie_details_with_non_string_field():
 
     expected_json = {
         'description': BasicMatchString(rule, match).__str__(),
-        'details': {
-            'Age': '10',
-            'Message': "{'arg0': 'moo', 'format': 'The cow goes %s!'}"
-        },
+        'details': {'Age': '10'},
         'message': 'ElastAlert: Opsgenie Details',
         'priority': None,
         'source': 'ElastAlert',
