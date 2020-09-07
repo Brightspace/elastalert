@@ -1,8 +1,37 @@
 # -*- coding: utf-8 -*-
 import os
 import boto3
+import threading
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
+class AwsSessionCache(object):
+
+    __sessionCache = dict()
+    __sessionCacheLock = threading.Lock()
+
+    def getOrCreateSession(self, region_name: str, profile_name: str):
+
+        key = str(threading.get_ident())
+        key += "|"
+        if region_name:
+            key += region_name
+        key += "|"
+        if profile_name:
+            key += profile_name
+
+        self.__sessionCacheLock.acquire()
+        try:
+            if key not in self.__sessionCache:
+                self.__sessionCache[key] = boto3.session.Session(
+                    region_name=region_name,
+                    profile_name=profile_name)
+            session = self.__sessionCache[key]
+        finally:
+            self.__sessionCacheLock.release()
+
+        return session
+
+awsSessionCache = AwsSessionCache()
 
 class RefeshableAWSRequestsAuth(AWSRequestsAuth):
     """
@@ -53,7 +82,9 @@ class Auth(object):
         if not aws_region and not os.environ.get('AWS_DEFAULT_REGION'):
             return None
 
-        session = boto3.session.Session(profile_name=profile_name, region_name=aws_region)
+        session = awsSessionCache.getOrCreateSession(
+            region_name=aws_region,
+            profile_name=profile_name)
 
         return RefeshableAWSRequestsAuth(
             refreshable_credential=session.get_credentials(),
