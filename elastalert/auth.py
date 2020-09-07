@@ -5,7 +5,6 @@ import threading
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
 class AwsSessionCache(object):
-
     __sessionCache = dict()
     __sessionCacheLock = threading.Lock()
 
@@ -31,7 +30,9 @@ class AwsSessionCache(object):
 
         return session
 
+
 awsSessionCache = AwsSessionCache()
+
 
 class RefeshableAWSRequestsAuth(AWSRequestsAuth):
     """
