@@ -4,6 +4,7 @@ import boto3
 import threading
 from aws_requests_auth.aws_auth import AWSRequestsAuth
 
+
 class AwsSessionCache(object):
     __sessionCache = dict()
     __sessionCacheLock = threading.Lock()
